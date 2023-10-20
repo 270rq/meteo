@@ -1,0 +1,473 @@
+body {
+  background-color: #191b1f;
+  margin: 0;
+  padding: 0;
+}
+
+.frame {
+  padding: auto;
+  margin-left: 75px;
+  box-sizing: border-box;
+  background-color: #191b1f;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+}
+.text{
+  color:white;
+  font-family: "Inter-Regular", Helvetica;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.main-weather {
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 433px;
+  height: fit-content;
+}
+.weather-icon{
+  position: absolute;
+  top:30%;
+  left:10%;
+}
+.weather {
+  position: relative;
+  height: 297px;
+  border-radius: 20px 20px 0px 0px;
+  width: 100%;
+  background-color: #444952;
+}
+
+.meta {
+  position: relative;
+  height: 120px;
+  margin-top: 0.5rem;
+  border-radius: 0px 0px 20px 20px;
+  width: 100%;
+  background-color: #444952;
+}
+.main-other{
+  margin-left: 2rem;
+  position: relative;
+  margin-top: 1rem;
+  margin-right: 1rem;
+  max-width: 888px;
+  width: auto;
+  height: fit-content;
+  background-color: #444952;
+  border-radius: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+@media only screen and (max-width: 1000px) {
+  .main-other {
+    max-width: 400px;
+  }
+  .frame{
+    max-width: 800px;
+  }
+
+}
+.day-text {
+  width: 86px;
+  top: 12px;
+  left: 21px;
+  font-size: 16px;
+  position: absolute;
+}
+.weather-param{
+  margin-top: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 375px;
+  width: 270px;
+}
+.big-param{
+ width: 100%;
+ height: 250px;
+ position: relative;
+ border-radius: 1rem;
+ background-color: #697181;
+}
+.big-param-text{
+  position: absolute;
+  font-size: 16px;
+  margin-left: 30px;
+  top: 7.5%;
+}
+.sun-text{
+  color: #FFC62D;
+  margin-left: 1rem;
+  font-size: 10px;
+  position: absolute;
+  font-family: "Inter-Regular", Helvetica;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+}
+.big-param .vos{
+  top: 150px;
+  left: 0;
+}
+.big-param .zah{
+  top: 150px;
+  right: 15px;
+}
+.litle-param{
+  position: relative;
+  width: 100%;
+  margin-top: 10px;
+  height: 90px;
+  border-radius: 1rem;
+  background-color: #697181;
+}
+.litle-param-text{
+  position: absolute;
+  font-size: 16px;
+  margin-left: 30px;
+  top: 10%;
+}
+
+.days-weather-container{
+  position: relative;
+  width: 100%;
+  max-width: 433px;
+  height: 320px;
+  margin-right: 1rem;
+  background-color: #191b1f;
+}
+.days-weather{
+  width: 100%;
+  margin-top: 2rem;
+  height: 302px;
+  border-radius: 1rem;
+  background-color: #444952;
+  overflow: auto;
+}
+.days-text{
+  margin-left: 1rem;
+  font-size: 16px;
+  position: absolute;
+  top:0;
+  left: 0;
+}
+.now-weather{
+  position: absolute;
+  bottom: 0;
+  left: 50%; 
+  transform: translateX(-50%); 
+  margin-bottom: 0rem;
+  background-color: #697181;
+  width: 388px;
+  height: 73px;
+  border-radius: 1rem;
+}
+.map-container{
+  position: relative;
+  height: 336px;
+  width: 61%;
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+@media only screen and (max-width: 1000px) {
+  .map-container{
+    width: 80%;
+  }
+
+}
+#map{
+  height: 302px;
+  width: 100%;
+  margin-top: 2rem;
+  border-radius: 1rem;
+}
+.map-text{
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 16px;
+}
+.frame-profile{
+  background-color: #444952;
+  height: 674px;
+  width: 83px;
+}
+.side-header {
+  position: fixed;
+  top: 0;
+  left: 10px;
+  width: 25px;
+  height: 95vh;
+  background-color: #444952;
+  padding: 20px;
+  z-index: 9999;
+  border-radius: 1rem;
+}
+.icon {
+  position: absolute;
+}
+.dop-i{
+  left: 50%;
+  top:30px;
+}
+.degress {
+  right: 230px;
+  top:50px;
+}
+.sunrise{
+  left: 20px;
+  top:130px;
+}
+.sunset{
+  right: 18px;
+  top:130px;
+}
+.icon-line{
+  position: absolute;
+  top: 110px;
+}
+.icon-map{
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  top: 10px;
+  left: 15px;
+}
+.icon-date{
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  top: 30px;
+  left: 15px;
+}
+.profile-button{
+  position: absolute;
+  top:93%;
+  left: 50%; 
+  transform: translateX(-50%); 
+  background-color: #697181;
+  border-radius: 3rem;
+}
+.time-text{
+  margin-left: 1rem;
+  font-size: 11px;
+  position: absolute;
+  top:15px;
+  left: 70px;
+}
+.icon-diagram{
+  position: absolute;
+  top: 25%;
+  left: 8%; 
+}
+
+.zero{
+  font-size: 11px;
+  position: absolute;
+  left:6%;
+  top:83%;
+}
+.two{
+  font-size: 11px;
+  position: absolute;
+  left:14%;
+  top:46%;
+}
+.four{
+  font-size: 11px;
+  position: absolute;
+  left:26%;
+  top:20%;
+}
+.six{
+  font-size: 11px;
+  position: absolute;
+  left:50%;
+  top:10%;
+}
+.eigth{
+  font-size: 11px;
+  position: absolute;
+  left:70%;
+  top:20%;
+}
+.ten{
+  font-size: 11px;
+  position: absolute;
+  left:80%;
+  top:46%;
+}
+.twelve{
+  font-size: 11px;
+  position: absolute;
+  left:88%;
+  top:83%;
+}
+.icon-search{
+  position: absolute;
+  border-radius: 3rem;
+  top:2%;
+  left:85%;
+}
+.search-container {
+  position: relative;
+}
+
+.search-form {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  display: none;
+}
+
+.search-input {
+  width: 200px;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.search-btn {
+  padding: 8px;
+  border: none;
+  background-color: #fff;
+}
+
+.icon-search {
+  padding: 8px;
+  border: none;
+  background-color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .search-form {
+    position: static;
+    transform: none;
+    display: block;
+    margin-top: 10px;
+  }}
+
+  
+  
+.date-text{
+  position: absolute;
+  left: 70px;
+  top: 65px;
+  font-size: 16px;
+  
+}
+
+.geo-text{
+  position: absolute;
+  left: 70px;
+  top: 25px;
+  font-size: 16px;
+}
+
+.temp-text{
+  position: absolute;
+  left: 10%;
+  top: 60%;
+  font-size: 36px;
+}
+.wind_speed-text{
+  position: absolute;
+  left: 10%;
+  top: 70%;
+  font-size: 24px;
+}
+.number-text{
+  position: absolute;
+  left: 10%;
+  top: 60%;
+  font-size: 24px;
+}
+.uv-text{
+  position: absolute;
+  left: 45%;
+  top: 70%;
+  font-size: 24px;
+}
+.sunrise-text{
+  position: absolute;
+  left: 5%;
+  top: 65%;
+  font-size: 14px;
+}
+.sunset-text{
+  position: absolute;
+  left: 82%;
+  top: 65%;
+  font-size: 14px;
+}
+.dop-txt {
+  display: inline;
+  font-size: 14px;
+}
+.litle-param-dop-text{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-size: 12px;
+}
+svg {
+  width: 100%;
+  height: 100%;
+}
+path {
+  fill: none;
+  stroke: url(#gradient);
+  stroke-width: 2;
+}
+.all-container {
+  position: absolute;
+  top:10%;
+  left: 5%;
+  background-color: #444952;
+  width: 172px;
+  height: 178px;
+  border-radius: 1rem;
+  z-index: 999;
+}
+.genre-text{
+  position: absolute;
+  top: 10%;
+  left: 35%;
+  font-size: 12px;
+}
+.genre-select{
+  position: absolute;
+  top: 25%;
+  left: 15%;
+  width: 120px;
+}
+.name-text{
+  position: absolute;
+  top: 40%;
+  left: 35%;
+  font-size: 12px;
+}
+.name-select{
+  position: absolute;
+  top: 55%;
+  left: 15%;
+  width: 120px;
+}
+.map-ok{
+  position: absolute;
+  height: 22px;
+  width: 106px;
+  background-color: #3E92E0;
+  border-radius: 1rem;
+  top: 80%;
+  left:18%;
+}

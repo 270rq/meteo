@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "yandex-maps": "^0.0.1",
+    "ymaps": "^0.2.1"
+  }
+}
