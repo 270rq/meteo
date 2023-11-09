@@ -1,6 +1,27 @@
 var map;
 var city;
 
+async function search(query) {
+  // Очищаем результаты поиска
+  console.log(query);
+  document.getElementById('searchRes').innerHTML = '';
+  console.log("search");
+
+  // Получаем данные о городах
+  if (!city) {
+    city = await getCity();
+  }
+  console.log(city);
+  // Фильтруем массив по введенному запросу
+  const filteredData = city.filter(item => item.city.toLowerCase().includes(query.toLowerCase()));
+
+  // Отображаем результаты поиска
+  filteredData.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = item.city + " " + item.region;
+    document.getElementById('searchRes').appendChild(li);
+  });
+}
 async function getMenudata(Day, City, Region) {
   const response = await fetch(`https://localhost:7024/WeatherDay?Day=${Day}&City=${City}&Region=${Region}`, {
     mode: 'cors',
