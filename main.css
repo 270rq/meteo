@@ -321,6 +321,46 @@ body {
   font-size: 16px;
   
 }
+.search{
+  display: flex;
+  background: #2f3640;
+  height: 40px;
+  border-radius: 40px;
+  padding: 10px;
+  width: fit-content;
+}
+
+.search-button{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  background: #2f3640;
+  justify-content: center;
+  align-items: center;
+  transition: 0.4s;
+  color: #ffffff;
+  cursor: pointer;
+}
+.search-button > i {
+  font-size: 30px;
+}
+.search:hover > .search_city{
+  width: 240px;
+  padding: 0 6px;
+}
+.search_city{
+  border: none;
+  background: none;
+  outline: none;
+  padding: 0;
+  color: #ffffff;
+  font-size: 16px;
+  transition: 0.4s;
+  line-height: 40px;
+  width: 0;
+  font-weight: bold;
+}
 .geo-text{
   position: absolute;
   left: 70px;
