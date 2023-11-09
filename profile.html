@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="globals.css" />
+  <link rel="stylesheet" href="profile.css" />
+  <script src="profile.js"></script>
+</head>
+
+<body onload="putAllergInSelect()">
+  <div class="frame">
+    <div class="frame-profile">
+      <div class="avatar-container"> <img id="avatar" src="default-avatar.jpg" alt="Аватар"> <input type="file"
+          id="avatar-input" accept="image/*" style="display: none;"> <label for="avatar-input"
+          class="upload-button">Выберите фото</label> </div>
+      <div class="text title">Личные данные</div>
+      <div class="select_container">
+        <div class="text user-text">Имя</div> <input class="user-name"></input>
+        <div class="text flower-text">Аллергены</div> <select id="selAllerg" class="flower-name"></select>
+      </div> <button class="profile_button" onclick="updateAllergen()">ОК</button>
+    </div>
+  </div>
+</body>
+
+</html>

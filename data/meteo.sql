@@ -4,12 +4,7 @@ CREATE TABLE IF NOT EXISTS region (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS users (
-    id INT NOT NULL AUTO_INCREMENT,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password LONGTEXT NOT NULL,
-    PRIMARY KEY (id)
-);
+
 
 CREATE TABLE IF NOT EXISTS city (
   id INT NOT NULL,
@@ -43,6 +38,14 @@ CREATE TABLE IF NOT EXISTS flower (
   CONSTRAINT fk_family_name FOREIGN KEY (family) REFERENCES family(name),
   INDEX idx_flower_name (name)
 );
+CREATE TABLE IF NOT EXISTS users (
+    id INT NOT NULL AUTO_INCREMENT,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password LONGTEXT NOT NULL,
+    allergen VARCHAR(50),
+  CONSTRAINT allergen_flower_fk FOREIGN KEY (allergen) REFERENCES flower(name),
+    PRIMARY KEY (id)
+);
 
 CREATE TABLE IF NOT EXISTS menu (
   id DATETIME NOT NULL,
@@ -62,8 +65,14 @@ CREATE TABLE IF NOT EXISTS map (
   name_flower VARCHAR(50) NOT NULL,
   x FLOAT NOT NULL,
   y FLOAT NOT NULL,
-  lvl INT NOT NULL CHECK (lvl >= 1 AND lvl <= 3), -- Ограничение на диапазон от 1 до 3
   PRIMARY KEY (month, name_flower, x, y),
   CONSTRAINT fk_flower_name_map FOREIGN KEY (name_flower) REFERENCES flower(name)
+);
+CREATE TABLE IF NOT EXISTS  users_chois(
+id_users INT NOT NULL,
+chois VARCHAR(50) NOT NULL,
+PRIMARY KEY (id_users,chois),
+CONSTRAINT fk_users_id FOREIGN KEY (id_users) REFERENCES users(id),
+CONSTRAINT fk_flower_name FOREIGN KEY (chois) REFERENCES flower(name)
 );
 CREATE VIEW cityWithRegion as SELECT city.id,city.name, region.region_name FROM city,region WHERE city.region_id = region.id;

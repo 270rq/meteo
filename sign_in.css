@@ -36,37 +36,47 @@ body {
 .password{
   top: 160px;
 }
+.confPass{
+  top: 200px;
+}
 .login{
   top: 120px;
 }
 .sign-in{
   position: absolute;
-  top: 55%;
-  left:50%;
-  transform: translateX(-50%);
+  top:65%;
   background-color: #FF8157;
-  width: 90px;
-  height: 26px;
-  border-radius: 10px;
-  text-align: center;
-  color: white;
-  font-size: 15px;
-  font-family: "Inter-Regular", Helvetica;
-}
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 16px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+  font-size: 14px;
+  }
+  .sign-in:hover {
+    background-color: #ab2f06;
+  }
+  
+
 .sign-up{
   position: absolute;
-  top: 70%;
-  left:50%;
+  top:80%;
+  left: 50%;
   transform: translateX(-50%);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+  font-size: 14px;
   background-color: #3ECDE0;
-  width: 209px;
-  height: 26px;
-  border-radius: 10px;
-  text-align: center;
-  color: white;
-  font-size: 16px;
-  font-family: "Inter-Regular", Helvetica;
+  
 }
+.sign-up:hover {
+  background-color: #1893a4;
+}
+
 .text{
   width: 86px;
   top: 15%;

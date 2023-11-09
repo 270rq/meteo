@@ -2,21 +2,22 @@
 <html>
   <head>
     <link rel="stylesheet" href="globals.css" />
-    <link rel="stylesheet" href="sign_up.css" />
+    <link rel="stylesheet" href="sign_in.css" />
+
+    <script src="./sign_in.js"></script>
   </head>
   <body>
     <div class="frame">
-      <div class="frame-profile">
-        <div class="avatar-container">
-          <img id="avatar" src="default-avatar.jpg" alt="Аватар">
-          <input type="file" id="avatar-input" accept="image/*" style="display: none;">
-          <label for="avatar-input" class="upload-button">Выберите фото</label></div>
-        <div class="text title">Личные данные</div>
-        <div class ="text user-text">Имя</div>
-        <input class="user-name"></input>
-        <div class="text flower-text">Аллергены</div>
-        <select class="flower-name"></select>
+      <div class="frame-login">
+        <input class="login" id="login" placeholder="Маил"></input>
+        <div class="icon-login"><img class="login-img" src="icon/arrow-right-to-bracket-svgrepo-com.svg" /></div>
+        <input class="password" id="password" placeholder="Пароль"></input>
+        <input class="password confPass" id="Confpassword" placeholder="Подтвердите пароль"></input>
+        <button class="sign-in" onclick="reg()">Зарегистрироваться</button>
+
+        <a href="sign_in.html"><button class="sign-up">Войти</button></a>
+        <div class="text">Регистрация</div>
       </div>
-      </div>
+    </div>
   </body>
 </html>

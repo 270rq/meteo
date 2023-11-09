@@ -26,7 +26,8 @@ body {
 
 .main-weather {
   margin-top: 1rem;
-  width: 100%;
+  width: 400px;
+  margin-left: -101px;
   max-width: 433px;
   height: fit-content;
 }
@@ -67,12 +68,17 @@ body {
   align-items: center;
 }
 @media only screen and (max-width: 1000px) {
-  .main-other {
-    max-width: 400px;
-  }
+  
   .frame{
     max-width: 800px;
   }
+  .map-container{
+    width: 400px;
+  }
+  .main-other{
+    width: 95%;
+  }
+  
 
 }
 .day-text {
@@ -138,9 +144,9 @@ body {
 .days-weather-container{
   position: relative;
   width: 100%;
-  max-width: 433px;
+  max-width: 400px;
+  margin-left: 15px;
   height: 320px;
-  margin-right: 1rem;
   background-color: #191b1f;
 }
 .days-weather{
@@ -165,7 +171,7 @@ body {
   transform: translateX(-50%); 
   margin-bottom: 0rem;
   background-color: #697181;
-  width: 388px;
+  width: 370px;
   height: 73px;
   border-radius: 1rem;
 }
@@ -174,17 +180,13 @@ body {
   height: 336px;
   width: 61%;
   margin-top: 1rem;
-  margin-left: 1rem;
+  margin-left: 2rem;
+  margin-right: 1rem;
 }
-@media only screen and (max-width: 1000px) {
-  .map-container{
-    width: 80%;
-  }
 
-}
 #map{
   height: 302px;
-  width: 100%;
+  width: 90%;
   margin-top: 2rem;
   border-radius: 1rem;
 }
@@ -310,53 +312,7 @@ body {
   left:88%;
   top:83%;
 }
-.icon-search{
-  position: absolute;
-  border-radius: 3rem;
-  top:2%;
-  left:85%;
-}
-.search-container {
-  position: relative;
-}
 
-.search-form {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  display: none;
-}
-
-.search-input {
-  width: 200px;
-  padding: 8px;
-  border: none;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.search-btn {
-  padding: 8px;
-  border: none;
-  background-color: #fff;
-}
-
-.icon-search {
-  padding: 8px;
-  border: none;
-  background-color: #fff;
-}
-
-@media screen and (max-width: 768px) {
-  .search-form {
-    position: static;
-    transform: none;
-    display: block;
-    margin-top: 10px;
-  }}
-
-  
   
 .date-text{
   position: absolute;
@@ -365,7 +321,6 @@ body {
   font-size: 16px;
   
 }
-
 .geo-text{
   position: absolute;
   left: 70px;
@@ -463,11 +418,17 @@ path {
   width: 120px;
 }
 .map-ok{
-  position: absolute;
-  height: 22px;
-  width: 106px;
-  background-color: #3E92E0;
-  border-radius: 1rem;
-  top: 80%;
-  left:18%;
-}
+    position: absolute;
+      top: 70%;
+      left: 20%;
+      background-color: #007bff;
+      color: #fff;
+      padding: 8px 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 20px;
+      font-size: 14px;
+  }
+  .map-ok:hover {
+    background-color: #0056b3;
+  }

@@ -1,7 +1,18 @@
+var map;
+var city;
+
 async function getMenudata(Day, City, Region) {
   const response = await fetch(`https://localhost:7024/WeatherDay?Day=${Day}&City=${City}&Region=${Region}`, {
     mode: 'cors',
+  });
 
+  const data = await response.json();
+  return data;
+}
+
+async function getCity() {
+  const response = await fetch(`https://localhost:7024/city`, {
+    mode: 'cors',
   });
 
   const data = await response.json();
@@ -18,10 +29,14 @@ async function getFlower(Family) {
   const data = await response.json();
   return data;
 }
+let flowersWithFamyly = {};
 async function changeFlowerSelect() {
   const selectFamily = document.getElementById('famSel');
+  console.log(selectFamily.value);
+  console.log(flowersWithFamyly);
+  const flowers = flowersWithFamyly[selectFamily.value];
+  console.log(flowers);
 
-  let flowers = await getFlower(selectFamily.value);
   const selectFlower = document.getElementById('flowerSelect');
   selectFlower.innerHTML = "";
   flowers.forEach((familyName) => {
@@ -111,7 +126,7 @@ async function changedata() {
   document.getElementById("date-now").innerText = dateStr;
 
 
-  var map = L.map('map').setView([YMaps.location.latitude, YMaps.location.longitude], 12);
+  map = L.map('map').setView([58, 49], 12);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
@@ -168,28 +183,101 @@ async function changedata() {
     const weatherIcon = document.getElementById("weather-icon-image");
     weatherIcon.src = iconPath;
   }
-  // Пример вызова функции с определенными значениями:
-  updateWeatherIcon(dbDate[closestIndex].temperatureC, dbDate[closestIndex].precipitation, dbDate[closestIndex].visibility, dbDate[closestIndex].uvIndex, dbDate[closestIndex].speedWind, dbDate[closestIndex].windDirection);
+  try {
 
-  document.getElementById("temp-now").innerText = dbDate[closestIndex].temperatureC.toString() + "°C"
-  document.getElementById("wind_speed-now").innerHTML = dbDate[closestIndex].speedWind.toString() + " <p class='dop-txt'>km/h</p>"
-  document.getElementById("wet-now").innerHTML = dbDate[closestIndex].precipitation.toString() + "<p class='dop-txt'> %</p>"
-  document.getElementById("dewPoint-now").innerHTML = "Точка росы: " + dbDate[closestIndex].dewPoint.toString()
-  document.getElementById("visi-now").innerHTML = dbDate[closestIndex].visibility.toString() + "<p class='dop-txt'> km</p>"
-  document.getElementById("uv-now").innerHTML = dbDate[closestIndex].uvIndex.toString() + "<p class='dop-txt'> uv</p>"
-  document.getElementById("sunrise-now").innerHTML = dbDate[closestIndex].sunrise.toString()
-  document.getElementById("sunset-now").innerHTML = dbDate[closestIndex].sunset.toString()
-  document.getElementById("feel-now").innerHTML = dbDate[closestIndex].weatherSensation.toString()
+
+    // Пример вызова функции с определенными значениями:
+    updateWeatherIcon(dbDate[closestIndex].temperatureC, dbDate[closestIndex].precipitation, dbDate[closestIndex].visibility, dbDate[closestIndex].uvIndex, dbDate[closestIndex].speedWind, dbDate[closestIndex].windDirection);
+
+    document.getElementById("temp-now").innerText = dbDate[closestIndex].temperatureC.toString() + "°C"
+    document.getElementById("wind_speed-now").innerHTML = dbDate[closestIndex].speedWind.toString() + " <p class='dop-txt'>km/h</p>"
+    document.getElementById("wet-now").innerHTML = dbDate[closestIndex].precipitation.toString() + "<p class='dop-txt'> %</p>"
+    document.getElementById("dewPoint-now").innerHTML = "Точка росы: " + dbDate[closestIndex].dewPoint.toString()
+    document.getElementById("visi-now").innerHTML = dbDate[closestIndex].visibility.toString() + "<p class='dop-txt'> km</p>"
+    document.getElementById("uv-now").innerHTML = dbDate[closestIndex].uvIndex.toString() + "<p class='dop-txt'> uv</p>"
+    document.getElementById("sunrise-now").innerHTML = dbDate[closestIndex].sunrise.toString()
+    document.getElementById("sunset-now").innerHTML = dbDate[closestIndex].sunset.toString()
+    document.getElementById("feel-now").innerHTML = dbDate[closestIndex].weatherSensation.toString()
+  }
+  catch {
+    console.log("no data")
+  }
   const selectFamily = document.getElementById('famSel');
   const family = await getFamily(); // предполагается, что функция getFamily() возвращает массив строк
 
-  family.forEach((familyName) => {
+  const promises = family.map(async (familyName) => {
     const option = document.createElement('option');
+    const flowersData = await getFlower(familyName);
+    flowersWithFamyly[familyName] = flowersData;
     option.value = familyName;
     option.text = familyName;
     selectFamily.appendChild(option);
   });
-  changeFlowerSelect(); 
+
+  await Promise.all(promises);
+
+  let id = localStorage.getItem("id");
+  if (id) {
+    changeFlowerSelectOnUser(id);
+  }
+  else {
+    changeFlowerSelect();
+  }
 
 
 }
+async function changeFlowerSelectOnUser(id) {
+  let selFam = document.getElementById("famSel");
+  let selFlow = document.getElementById("flowerSelect");
+  const response = await fetch(`https://localhost:7024/user/loginReg/allerg?id=${id}`, {
+    mode: 'cors',
+  });
+  if (response.status == 200) {
+    const data = await response.text();
+    if (data != "not found" && data != null && data.length > 0) {
+      let family;
+      for (var fam in flowersWithFamyly){
+        let flowers = flowersWithFamyly[fam];
+        if (flowers.includes(data)){
+          family = fam;
+          break;
+        }
+        
+      }
+      let selectedIndex = Array.from(selFam.options).findIndex(option => option.value === family);
+      selFam.selectedIndex = selectedIndex;
+      await changeFlowerSelect()
+      selectedIndex = Array.from(selFlow.options).findIndex(option => option.value === data);
+      selFlow.selectedIndex = selectedIndex;
+    }
+  }
+}
+async function getMapDate() {
+  var sel = document.getElementById('flowerSelect').value;
+  if (sel != null) {
+    const currentDate = new Date();
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+    let monthNames = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
+    let currentMonth = monthNames[parseInt(month) - 1]
+    const dateStr = currentDate.toString().split(':').slice(0, 2).join(':');
+    var x = YMaps.location.latitude.toString().replace(",", ".").slice(0, 7);
+    var y = YMaps.location.longitude.toString().replace(",", ".").slice(0, 7);
+    let url = `https://localhost:7024/Map?month=${currentMonth}&Name_flower=${sel}&X=${x}&Y=${y}`.replace(',', '.');
+    const response = await fetch(url, {
+      mode: 'cors',
+
+    });
+    console.log(response);
+    const data = await response.json();
+    console.log(data)
+    data.forEach(function (el) {
+      var mark = L.marker([el.x, el.y]).addTo(map);
+
+      // Добавляем всплывающую подсказку для маркеров
+      mark.bindPopup("Маркер 1");
+    })
+  }
+
+
+}
+

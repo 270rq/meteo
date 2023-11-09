@@ -1,146 +1,163 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="main.css" />
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-      integrity="..."
-      crossorigin=""
-    />
-    <script
-      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-      integrity="..."
-      crossorigin=""
-    ></script>
-    <script
-      charset="utf-8"
-      src="https://api-maps.yandex.ru/1.1/index.xml"
-      type="text/javascript"
-    ></script>
-    <script src="./my.js"></script>
-    <script>
-      changedata();
+
+<head>
+  <link rel="stylesheet" href="main.css" />
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="map.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="..." crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="..." crossorigin=""></script>
+  <script charset="utf-8" src="https://api-maps.yandex.ru/1.1/index.xml" type="text/javascript"></script>
+  <script src="./my.js"></script>
+  <script>
+    changedata();
+  </script>
+</head>
+
+<body>
+  <header class="side-header"> <a id="link"></a>
+    <script> window.onload = function () {
+        var profileButton = document.getElementById("link");
+        var profileImage = document.createElement('img');
+         profileImage.src = 'icon/profile.svg'; 
+         profileImage.className = 'icon-profile';
+
+        if (localStorage.getItem('id')) {
+          profileButton.innerHTML = '';
+
+          var logoutButton = document.createElement('button');
+          logoutButton.className = 'logout-button';
+          logoutButton.innerHTML = 'Выход';
+          logoutButton.onclick = function () {
+            localStorage.removeItem('id');
+            location.reload();
+          }
+          var anotherLink = document.createElement("a");
+          anotherLink.href = "profile.html";
+          profileButton.appendChild(anotherLink);
+          anotherLink.appendChild(profileImage);
+
+          anotherLink.appendChild(logoutButton);
+        }
+        else {
+          var a = document.createElement("a");
+          a.href = "sign_in.html"
+          var logButton = document.createElement('button');
+          logButton.className = 'profile-button';
+          profileButton.appendChild(a);
+          a.appendChild(logButton);
+          logButton.appendChild(profileImage);
+        }
+      }
+
     </script>
-  </head>
-  <body>
-    <header class="side-header">
-      <a href="sign_in.html">
-      <button class="profile-button" href="sign_in.html">
-        <img class="icon-profile" src="icon/profile.svg" />
-      </button></a>
-    </header>
-    <div class="frame">
-      <div class="main-weather">
-        <div class="weather">
-          <div class="weather-icon">
-            <img id="weather-icon-image" src="weather 3d/01_sunny_color.svg" alt="Иконка погоды">
-          </div>
-          <div class="text temp-text" id="temp-now"></div>
-          <div class="search-container">
-            <button class="icon-search"><img src="icon/search.svg" /></button>
-            <form class="search-form" action="#">
-              <input type="text" class="search-input" placeholder="Поиск" />
-              <button type="submit" class="search-btn">
-                <i class="fa fa-search" aria-hidden="true"></i>
-              </button>
-            </form>
-          </div>
+  </header>
+  <div class="frame">
+    <div class="main-weather">
+      <div class="weather">
+        <div class="weather-icon">
+          <img id="weather-icon-image" src="weather 3d/01_sunny_color.svg" alt="Иконка погоды">
         </div>
-        <div class="meta">
-          <div class="icon-map">
-            <img class="icon-map" src="icon/map-pin.svg" />
-          </div>
-          <div class="text geo-text" id="geo-now"></div>
-          <div class="icon-date">
-            <img class="icon-date" src="icon/date.svg" />
-          </div>
-          <div class="text date-text" id="date-now"></div>
-        </div>
+        <div class="text temp-text" id="temp-now"></div>
+        <ul id="searchRes"></ul>
       </div>
-      <div class="main-other">
-        <div class="text day-text">Сегодня</div>
-        <div class="weather-param">
-          <div class="big-param">
-            <div class="text big-param-text">Ветер</div>
-            <div class="text wind_speed-text" id="wind_speed-now"></div>
-            <svg id="bezier" viewBox="0 0 400 400">
-              <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="black" />
-                <stop offset="100%" stop-color="white" />
-              </linearGradient>
-            </svg>
-          </div>
-          <div class="litle-param">
-            <div class="text litle-param-text">Влажность</div>
-            <div class="icon dop-i"><img src="icon/drop.svg" /></div>
-            <div class="text number-text" id="wet-now"></div>
-            <div class="text litle-param-dop-text" id="dewPoint-now"></div>
-          </div>
+      <div class="meta">
+        <div class="icon-map">
+          <img class="icon-map" src="icon/map-pin.svg" />
         </div>
-        <div class="weather-param">
-          <div class="big-param">
-            <div class="text big-param-text">UV индекс</div>
-            <div class="text uv-text" id="uv-now"></div>
-            <div class="icon-diagram">
-              <img src="icon/diagram.svg" />
-              <div class="text zero">0</div>
-              <div class="text two">2</div>
-              <div class="text four">4</div>
-              <div class="text six">6</div>
-              <div class="text eigth">8</div>
-              <div class="text ten">10</div>
-              <div class="text twelve">12</div>
-            </div>
-          </div>
-          <div class="litle-param">
-            <div class="text litle-param-text">Видимость</div>
-            <div class="icon dop-i"><img src="icon/eye.svg" /></div>
-            <div class="text number-text" id="visi-now"></div>
-          </div>
+        <div class="text geo-text" id="geo-now"></div>
+        <div class="icon-date">
+          <img class="icon-date" src="icon/date.svg" />
         </div>
-        <div class="weather-param">
-          <div class="big-param">
-            <div class="text big-param-text">Восход & Заход</div>
-            <div class="icon sunrise"><img src="icon/sunrise.svg" /></div>
-            <div class="sun-text vos">Восход</div>
-            <div class="text sunrise-text" id="sunrise-now"></div>
-            <div class="icon sunset"><img src="icon/sunset.svg" /></div>
-            <div class="sun-text zah">Заход</div>
-            <div class="text sunset-text" id="sunset-now"></div>
-            <div class="icon-line"><img src="icon/Line 3.svg" /></div>
-          </div>
-          <div class="litle-param">
-            <div class="text litle-param-text">Ощущается как</div>
-            <div class="icon degress"><img src="icon/degress.svg" /></div>
-            <div class="text litle-param-dop-text" id="feel-now"></div>
-          </div>
-        </div>
-      </div>
-      <div class="days-weather-container">
-        <div class="text days-text">7 дней</div>
-        <div class="days-weather">
-          <div class="tomorrow"></div>
-          <div class="now-weather">
-            <div class="text time-text">Сегодня</div>
-          </div>
-        </div>
-      </div>
-      <div class="map-container">
-        <div id="map">
-          <div class ="all-container">
-            <div class ="text genre-text">Семейство</div>
-            <select id="famSel" class="genre-select" onchange="changeFlowerSelect()"></select>
-            <div class ="text name-text">Аллергены</div>
-            <select id="flowerSelect" class="name-select"></select>
-            <button class="map-ok">Применить</button>
-          </div>
-        </div>
-        <div class="text map-text">Карта цветения</div>
+        <div class="text date-text" id="date-now"></div>
       </div>
     </div>
-  </body>
+    <div class="main-other">
+      <div class="text day-text">Сегодня</div>
+      <div class="weather-param">
+        <div class="big-param">
+          <div class="text big-param-text">Ветер</div>
+          <div class="text wind_speed-text" id="wind_speed-now"></div>
+          <svg id="bezier" viewBox="0 0 400 400">
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="black" />
+              <stop offset="100%" stop-color="white" />
+            </linearGradient>
+          </svg>
+        </div>
+        <div class="litle-param">
+          <div class="text litle-param-text">Влажность</div>
+          <div class="icon dop-i"><img src="icon/drop.svg" /></div>
+          <div class="text number-text" id="wet-now"></div>
+          <div class="text litle-param-dop-text" id="dewPoint-now"></div>
+        </div>
+      </div>
+      <div class="weather-param">
+        <div class="big-param">
+          <div class="text big-param-text">UV индекс</div>
+          <div class="text uv-text" id="uv-now"></div>
+          <div class="icon-diagram">
+            <img src="icon/diagram.svg" />
+            <div class="text zero">0</div>
+            <div class="text two">2</div>
+            <div class="text four">4</div>
+            <div class="text six">6</div>
+            <div class="text eigth">8</div>
+            <div class="text ten">10</div>
+            <div class="text twelve">12</div>
+          </div>
+        </div>
+        <div class="litle-param">
+          <div class="text litle-param-text">Видимость</div>
+          <div class="icon dop-i"><img src="icon/eye.svg" /></div>
+          <div class="text number-text" id="visi-now"></div>
+        </div>
+      </div>
+      <div class="weather-param">
+        <div class="big-param">
+          <div class="text big-param-text">Восход & Заход</div>
+          <div class="icon sunrise"><img src="icon/sunrise.svg" /></div>
+          <div class="sun-text vos">Восход</div>
+          <div class="text sunrise-text" id="sunrise-now"></div>
+          <div class="icon sunset"><img src="icon/sunset.svg" /></div>
+          <div class="sun-text zah">Заход</div>
+          <div class="text sunset-text" id="sunset-now"></div>
+          <div class="icon-line"><img src="icon/Line 3.svg" /></div>
+        </div>
+        <div class="litle-param">
+          <div class="text litle-param-text">Ощущается как</div>
+          <div class="icon degress"><img src="icon/degress.svg" /></div>
+          <div class="text litle-param-dop-text" id="feel-now"></div>
+        </div>
+      </div>
+    </div>
+    <div class="days-weather-container">
+      <div class="text days-text">7 дней</div>
+      <div class="days-weather">
+        <div class="tomorrow"></div>
+        <div class="now-weather">
+          <div class="text time-text">Сегодня</div>
+        </div>
+      </div>
+    </div>
+    <div class="map-container">
+      <div id="map">
+        <div class="all-container">
+          <div class="text genre-text">Семейство</div>
+          <select id="famSel" class="genre-select" onchange="changeFlowerSelect()"></select>
+          <div class="text name-text">Аллергены</div>
+          <select id="flowerSelect" class="name-select"></select>
+          <button class="map-ok" onclick="
+                getMapDate()
+              ">Применить</button>
+
+        </div>
+      </div>
+      <div class="text map-text">Карта цветения</div>
+    </div>
+  </div>
+</body>
+
 </html>
