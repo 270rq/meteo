@@ -1,4 +1,4 @@
-import { serverUrl } from './config.js';
+const serverUrl = 'https://7a45-178-141-169-11.ngrok-free.app   ';
 function login() {
     var login = document.getElementById("login").value;
     var password = document.getElementById("password").value;

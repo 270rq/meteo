@@ -1,4 +1,4 @@
-import { serverUrl } from './config.js';
+const serverUrl = 'https://7a45-178-141-169-11.ngrok-free.app ';
 var map;
 var city;
 async function search(query) {
@@ -100,7 +100,7 @@ function colorDistance(color1, color2) {
   return Math.sqrt(Math.pow(r1 - r2, 2) + Math.pow(g1 - g2, 2) + Math.pow(b1 - b2, 2));
 }
 async function getFamily() {
-  const response = await fetch(`serverUrl/Family`, {
+  const response = await fetch(`${serverUrl}/Family`, {
     mode: 'cors',
 
   });

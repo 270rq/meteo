@@ -1,2 +1,2 @@
-
-export const serverUrl = 'https://d721-178-141-169-11.ngrok-free.app';
+const serverUrl = 'https://localhost:7024';
+export default {serverUrl};

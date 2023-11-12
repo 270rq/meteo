@@ -1,4 +1,4 @@
-import { serverUrl } from './config.js';
+const serverUrl = 'https://7a45-178-141-169-11.ngrok-free.app';
 async function getAllergen() {
     let id = localStorage.getItem("id");
     if (id) {
