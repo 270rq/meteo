@@ -1,9 +1,10 @@
+import { serverUrl } from './config.js';
 async function getAllergen() {
     let id = localStorage.getItem("id");
     if (id) {
 
         let sel = document.getElementById("selAllerg");
-        const response = await fetch(`https://localhost:7024/user/loginReg/allerg?id=${id}`, {
+        const response = await fetch(`${serverUrl}/user/loginReg/allerg?id=${id}`, {
             mode: 'cors',
         });
         if (response.status == 200) {
@@ -18,7 +19,7 @@ async function getAllergen() {
 }
 async function putAllergInSelect() {
     let sel = document.getElementById("selAllerg");
-    const response = await fetch(`https://localhost:7024/allPlants`, {
+    const response = await fetch(`${serverUrl}/allPlants`, {
         mode: 'cors',
     });
 
@@ -35,11 +36,11 @@ async function updateAllergen() {
     let id = localStorage.getItem("id");
     if (id) {
         let sel = document.getElementById("selAllerg");
-        const response = await fetch(`https://localhost:7024/user/loginReg/allerg?flower=${sel.value}&id=${id}`, {
+        const response = await fetch(`${serverUrl}/user/loginReg/allerg?flower=${sel.value}&id=${id}`, {
             method: 'POST',
             mode: 'cors'
         });
     }
-    window.location.href = "http://127.0.0.1:5500/main.html";
+    window.location.href = "index.html";
 }
 

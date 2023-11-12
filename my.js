@@ -1,8 +1,29 @@
+import { serverUrl } from './config.js';
 var map;
 var city;
-
+async function search(query) {
+  // Очищаем результаты поиска
+  console.log(query);
+  document.getElementById('searchRes').innerHTML = '';
+  console.log("search");
+ 
+  // Получаем данные о городах
+  if (!city) {
+    city = await getCity();
+  }
+  console.log(city);
+  // Фильтруем массив по введенному запросу
+  const filteredData = city.filter(item => item.city.toLowerCase().includes(query.toLowerCase()));
+ 
+  // Отображаем результаты поиска
+  filteredData.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = item.city + " " + item.region;
+    document.getElementById('searchRes').appendChild(li);
+  });
+}
 async function getMenudata(Day, City, Region) {
-  const response = await fetch(`https://localhost:7024/WeatherDay?Day=${Day}&City=${City}&Region=${Region}`, {
+  const response = await fetch(`${serverUrl}/WeatherDay?Day=${Day}&City=${City}&Region=${Region}`, {
     mode: 'cors',
   });
 
@@ -11,7 +32,7 @@ async function getMenudata(Day, City, Region) {
 }
 
 async function getCity() {
-  const response = await fetch(`https://localhost:7024/city`, {
+  const response = await fetch(`${serverUrl}/city`, {
     mode: 'cors',
   });
 
@@ -21,7 +42,7 @@ async function getCity() {
 
 async function getFlower(Family) {
 
-  const response = await fetch(`https://localhost:7024/plants?Family=${Family}`, {
+  const response = await fetch(`${serverUrl}/plants?Family=${Family}`, {
     mode: 'cors',
 
   });
@@ -79,7 +100,7 @@ function colorDistance(color1, color2) {
   return Math.sqrt(Math.pow(r1 - r2, 2) + Math.pow(g1 - g2, 2) + Math.pow(b1 - b2, 2));
 }
 async function getFamily() {
-  const response = await fetch(`https://localhost:7024/Family`, {
+  const response = await fetch(`serverUrl/Family`, {
     mode: 'cors',
 
   });
@@ -89,7 +110,7 @@ async function getFamily() {
 }
 
 async function getWeatherWeek(Day, City, Region) {
-  const response = await fetch(`https://localhost:7024/WeatherWeak?Day=${Day}&City=${City}&Region=${Region}`, {
+  const response = await fetch(`${serverUrl}/WeatherWeak?Day=${Day}&City=${City}&Region=${Region}`, {
     mode: 'cors',
   });
 
@@ -134,24 +155,6 @@ async function changedata() {
   }).addTo(map);
   const dbDate = await getMenudata(formattedDate, City, Region);
   console.log(dbDate);
-  var data = [
-    { x: 50, y: 30 },
-    { x: 150, y: 50 },
-    { x: 250, y: 350 },
-    { x: 350, y: 100 }
-  ];
-
-  var line = d3.line()
-    .x(function (d) { return d.x; })
-    .y(function (d) { return d.y; })
-    .curve(d3.curveBasis);
-
-  d3.select("#bezier")
-    .append("path")
-    .datum(data)
-    .attr("d", line);
-  let closestTimestamp = Infinity;
-  let closestIndex = 0;
   // Проходимся по всем датам и находим ближайшую
   dbDate.findIndex(function (date, index) {
     let dateTimestamp = new Date(date.day).getTime();
@@ -229,7 +232,7 @@ async function changedata() {
 async function changeFlowerSelectOnUser(id) {
   let selFam = document.getElementById("famSel");
   let selFlow = document.getElementById("flowerSelect");
-  const response = await fetch(`https://localhost:7024/user/loginReg/allerg?id=${id}`, {
+  const response = await fetch(`${serverUrl}/user/loginReg/allerg?id=${id}`, {
     mode: 'cors',
   });
   if (response.status == 200) {
@@ -262,7 +265,7 @@ async function getMapDate() {
     const dateStr = currentDate.toString().split(':').slice(0, 2).join(':');
     var x = YMaps.location.latitude.toString().replace(",", ".").slice(0, 7);
     var y = YMaps.location.longitude.toString().replace(",", ".").slice(0, 7);
-    let url = `https://localhost:7024/Map?month=${currentMonth}&Name_flower=${sel}&X=${x}&Y=${y}`.replace(',', '.');
+    let url = `${serverUrl}/Map?month=${currentMonth}&Name_flower=${sel}&X=${x}&Y=${y}`.replace(',', '.');
     const response = await fetch(url, {
       mode: 'cors',
 

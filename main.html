@@ -61,6 +61,13 @@
           <img id="weather-icon-image" src="weather 3d/01_sunny_color.svg" alt="Иконка погоды">
         </div>
         <div class="text temp-text" id="temp-now"></div>
+        <div class="search">
+          <input id="searchCity" type="text" class="search_city" placeholder="Поиск "
+            oninput="search(event.target.value)"></input>
+          <a class="search-button">
+            <i class='fas fa-search'></i>
+          </a>
+        </div>
         <ul id="searchRes"></ul>
       </div>
       <div class="meta">

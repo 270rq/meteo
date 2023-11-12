@@ -1,3 +1,4 @@
+import { serverUrl } from './config.js';
 function login() {
     var login = document.getElementById("login").value;
     var password = document.getElementById("password").value;
@@ -23,7 +24,7 @@ function login() {
     var xhr = new XMLHttpRequest();
 
     // Настраиваем его для отправки POST-запроса на сервер
-    xhr.open('POST', 'https://localhost:7024/user/loginReg/log', true);
+    xhr.open('POST', `${serverUrl}/user/loginReg/log`, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
 
     // Создаем объект с данными для отправки на сервер
@@ -47,7 +48,7 @@ function login() {
             localStorage.setItem('id', response);
             if(response !== ''){
                 // Переходим на страницу "home.html"
-                window.location.href = 'main.html';
+                window.location.href = 'index.html';
               }}
               else{
                 alert("Нереверный пароль!");
@@ -90,7 +91,7 @@ function reg() {
     var xhr = new XMLHttpRequest();
 
     // Настраиваем его для отправки POST-запроса на сервер
-    xhr.open('POST', 'https://localhost:7024/user/loginReg/reg', true);
+    xhr.open('POST', `${serverUrl}/user/loginReg/reg`, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
 
     // Создаем объект с данными для отправки на сервер
@@ -115,7 +116,7 @@ function reg() {
             localStorage.setItem('id', response);
             if(response !== ''){
                 // Переходим на страницу "home.html"
-                window.location.href = 'main.html';
+                window.location.href = 'index.html';
               }}
               else{
                 alert("Что-то не так!");

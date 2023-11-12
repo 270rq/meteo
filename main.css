@@ -14,7 +14,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  width: 95%;
+  width: 87%;
 }
 .text{
   color:white;
@@ -27,7 +27,6 @@ body {
 .main-weather {
   margin-top: 1rem;
   width: 400px;
-  margin-left: -101px;
   max-width: 433px;
   height: fit-content;
 }
@@ -52,6 +51,9 @@ body {
   width: 100%;
   background-color: #444952;
 }
+
+
+
 .main-other{
   margin-left: 2rem;
   position: relative;
@@ -67,20 +69,7 @@ body {
   justify-content: center;
   align-items: center;
 }
-@media only screen and (max-width: 1000px) {
-  
-  .frame{
-    max-width: 800px;
-  }
-  .map-container{
-    width: 400px;
-  }
-  .main-other{
-    width: 95%;
-  }
-  
 
-}
 .day-text {
   width: 86px;
   top: 12px;
@@ -312,8 +301,46 @@ body {
   left:88%;
   top:83%;
 }
-
-  
+.search{
+  display: flex;
+  background: #2f3640;
+  height: 40px;
+  border-radius: 40px;
+  padding: 10px;
+  width: fit-content;
+}
+ 
+.search-button{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  background: #2f3640;
+  justify-content: center;
+  align-items: center;
+  transition: 0.4s;
+  color: #ffffff;
+  cursor: pointer;
+}
+.search-button > i {
+  font-size: 30px;
+}
+.search:hover > .search_city{
+  width: 240px;
+  padding: 0 6px;
+}
+.search_city{
+  border: none;
+  background: none;
+  outline: none;
+  padding: 0;
+  color: #ffffff;
+  font-size: 16px;
+  transition: 0.4s;
+  line-height: 40px;
+  width: 0;
+  font-weight: bold;
+}
 .date-text{
   position: absolute;
   left: 70px;
@@ -431,4 +458,47 @@ path {
   }
   .map-ok:hover {
     background-color: #0056b3;
+  }
+  @media (max-width: 1280px)  {
+  
+    .main-other{
+      max-width: 700px;
+    }
+  }
+  
+  @media (max-width:980px) {
+    .main-weather{
+      width: 100%;
+    }
+    .main-other{
+      max-width: 400px;
+      margin-left: 1rem;
+    }
+    .days-weather-container{
+      margin-left: 0;
+      width: 100%;
+    }
+    .map-container{
+      width: 68%;
+    }
+    #map{
+      width:96%;
+    }
+    
+  }
+  @media (max-width:828) {
+    .main-other{
+      max-width: 400px;
+      margin-left: 1rem;
+    }
+    .days-weather-container{
+      margin-left: 0;
+    }
+    .map-container{
+      width: 68%;
+    }
+    #map{
+      width:96%;
+    }
+    
   }
