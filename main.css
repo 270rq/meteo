@@ -6,7 +6,7 @@ body {
 
 .frame {
   padding: auto;
-  margin-left: 75px;
+  margin-left: 100px;
   box-sizing: border-box;
   background-color: #191b1f;
   position: relative;
@@ -57,14 +57,12 @@ body {
 .main-other{
   margin-left: 2rem;
   position: relative;
-  margin-top: 1rem;
-  margin-right: 1rem;
-  max-width: 888px;
-  width: auto;
+  margin-top: 2rem;
+  width: fit-content;
   height: fit-content;
   background-color: #444952;
   border-radius: 20px;
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
@@ -134,7 +132,6 @@ body {
   position: relative;
   width: 100%;
   max-width: 400px;
-  margin-left: 15px;
   height: 320px;
   background-color: #191b1f;
 }
@@ -167,7 +164,7 @@ body {
 .map-container{
   position: relative;
   height: 336px;
-  width: 61%;
+  width: 65%;
   margin-top: 1rem;
   margin-left: 2rem;
   margin-right: 1rem;
