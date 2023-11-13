@@ -1,6 +1,7 @@
 const serverUrl = 'https://7a45-178-141-169-11.ngrok-free.app';
 var map;
 var city;
+
 async function search(query) {
   // Очищаем результаты поиска
   console.log(query);
